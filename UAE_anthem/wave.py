@@ -170,8 +170,7 @@ def nano_banana_edit(img1, age_gap):
         # REMOVED: "loras" field (Qwen-specific)
         "output_format": "jpeg",
         "prompt": prompt,
-        "resolution": "1k",                   # CHANGED: from "size": "756*1024"
-        # REMOVED: "seed" field
+        "resolution": "1k",                  
     }
 
     begin = time.time()
