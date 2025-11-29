@@ -14,20 +14,20 @@ interface AvatarOption {
 
 const avatarOptions: AvatarOption[] = [
     {
-        type: 'Male',
-        imagePath: '/avatars/male.jpg',
-    },
-    {
-        type: 'Female',
-        imagePath: '/avatars/female.jpg',
-    },
-    {
         type: 'Boy',
         imagePath: '/avatars/boy.jpg',
     },
     {
         type: 'Girl',
         imagePath: '/avatars/girl.jpg',
+    },
+    {
+        type: 'Male',
+        imagePath: '/avatars/male.jpg',
+    },
+    {
+        type: 'Female',
+        imagePath: '/avatars/female.jpg',
     },
 ];
 

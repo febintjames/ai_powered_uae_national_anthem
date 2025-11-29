@@ -160,20 +160,20 @@ export default function Processing() {
               <div className="flex items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 transition-all ${currentStatus === 'completed' || currentStatus === 'video'
-                      ? 'bg-emerald-600 text-white'
-                      : currentStatus === 'image'
-                        ? 'bg-emerald-400 text-white animate-pulse'
-                        : 'bg-gray-300 text-gray-600'
+                    ? 'bg-emerald-600 text-white'
+                    : currentStatus === 'image'
+                      ? 'bg-emerald-400 text-white animate-pulse'
+                      : 'bg-gray-300 text-gray-600'
                     }`}
                 >
                   {currentStatus === 'completed' || currentStatus === 'video' ? '✓' : '1'}
                 </div>
                 <span
                   className={`text-base font-semibold ${currentStatus === 'completed' || currentStatus === 'video'
-                      ? 'text-emerald-600'
-                      : currentStatus === 'image'
-                        ? 'text-emerald-500'
-                        : 'text-gray-700'
+                    ? 'text-emerald-600'
+                    : currentStatus === 'image'
+                      ? 'text-emerald-500'
+                      : 'text-gray-700'
                     }`}
                 >
                   Processing your face
@@ -184,20 +184,20 @@ export default function Processing() {
               <div className="flex items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 transition-all ${currentStatus === 'completed'
-                      ? 'bg-emerald-600 text-white'
-                      : currentStatus === 'video'
-                        ? 'bg-emerald-400 text-white animate-pulse'
-                        : 'bg-gray-300 text-gray-600'
+                    ? 'bg-emerald-600 text-white'
+                    : currentStatus === 'video'
+                      ? 'bg-emerald-400 text-white animate-pulse'
+                      : 'bg-gray-300 text-gray-600'
                     }`}
                 >
                   {currentStatus === 'completed' ? '✓' : '2'}
                 </div>
                 <span
                   className={`text-base font-semibold ${currentStatus === 'completed'
-                      ? 'text-emerald-600'
-                      : currentStatus === 'video'
-                        ? 'text-emerald-500'
-                        : 'text-gray-700'
+                    ? 'text-emerald-600'
+                    : currentStatus === 'video'
+                      ? 'text-emerald-500'
+                      : 'text-gray-700'
                     }`}
                 >
                   Generating video
@@ -208,8 +208,8 @@ export default function Processing() {
               <div className="flex items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 transition-all ${currentStatus === 'completed'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-gray-300 text-gray-600'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-gray-300 text-gray-600'
                     }`}
                 >
                   {currentStatus === 'completed' ? '✓' : '3'}
