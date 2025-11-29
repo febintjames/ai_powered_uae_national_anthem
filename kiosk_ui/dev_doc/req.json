@@ -1,0 +1,40 @@
+[
+    {
+        "status": 200,
+        "data": "Object/Array",
+        "messsage": "messsage",
+        "<about_response>": "API common response format"
+    },
+
+    {
+        "file_type": "image/jpeg/wav",
+        "file_kind": "image/audio",
+        "<about_request>": "API common request for presign upload image/audio",
+        "<api>": "/presign-upload"
+    },
+
+    {
+        "upload_url": "https://s3-presigned-url...",
+        "file_key": "image/7c83fb9e-3551-4d27-ae75.jpg",
+        "<about_response>": "API common response format for presign upload (aws s3 presigned image/audio path/url)",
+        "<api>": "/presign-upload"
+    },
+
+    {
+        "uuid": "4a07774a-8e11-4b8d-9ca9-ece6d802e85f",
+        "user_name": "John Doe",
+        "user_mobile": "0501234567",
+        "user_image_key": "image/IMG_8881.jpg",
+        "user_audio_key": "audio/AUD_1234.webm",
+        "<about_request>": "API common request for final upload user data (image/audio path/url) and video creation",
+        "<api>": "/upload-user-data"
+    },
+
+    {
+        "uuid": "4a07774a-8e11-4b8d-9ca9-ece6d802e85f",
+        "status": "success",
+        "video_url": "https://s3-video-url/VIDEO_5678.mp4",
+        "<about_response>": "API common response fromat for final upload user data (image/audio path/url) and video creation",
+        "<api>": "/upload-user-data"
+    }
+]
