@@ -1,0 +1,22 @@
+2025-11-29 11:21:56,001 - api.main - INFO - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Starting pipeline for age_group: Male
+2025-11-29 11:21:56,003 - api.main - INFO - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Step 1: Image generation started...
+2025-11-29 11:22:25,488 - api.main - INFO - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Step 1: Image generation completed - https://d2p7pge43lyniu.cloudfront.net/output/ee76f56c-7f55-4150-9a36-68a18954b33b-u2_814bfdeb-3338-4ad7-9ee4-d93d3fc818ae.jpeg
+2025-11-29 11:22:25,489 - api.main - INFO - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Step 2: Video generation started...
+2025-11-29 11:22:25,491 - api.main - ERROR - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Pipeline FAILED with error: Video generation failed
+2025-11-29 11:22:25,498 - api.main - ERROR - [0935c783-897f-4c88-9d8e-f7b12c1b5c78] Traceback:
+Traceback (most recent call last):
+  File "C:\Users\febin\OneDrive\Desktop\avatar\UAE_anthem\api\main.py", line 85, in _run_pipeline
+    raise RuntimeError("Video generation failed")
+RuntimeError: Video generation failed
+
+2025-11-29 11:52:43,635 - api.main - INFO - [70919741-3073-43bd-a5d3-8652b3af378e] Starting pipeline for age_group: Male
+2025-11-29 11:52:43,636 - api.main - INFO - [70919741-3073-43bd-a5d3-8652b3af378e] Step 1: Image generation started...
+2025-11-29 11:53:02,716 - api.main - INFO - [70919741-3073-43bd-a5d3-8652b3af378e] Step 1: Image generation completed - https://d2p7pge43lyniu.cloudfront.net/output/79acce66-cc85-4bda-81c7-84dc7e6157ba-u2_bac36df3-1f0c-4d9b-a920-5cbd22def0b1.jpeg
+2025-11-29 11:53:02,723 - api.main - INFO - [70919741-3073-43bd-a5d3-8652b3af378e] Step 2: Video generation started...
+2025-11-29 11:53:02,742 - api.main - ERROR - [70919741-3073-43bd-a5d3-8652b3af378e] Pipeline FAILED with error: Video generation failed
+2025-11-29 11:53:02,758 - api.main - ERROR - [70919741-3073-43bd-a5d3-8652b3af378e] Traceback:
+Traceback (most recent call last):
+  File "C:\Users\febin\OneDrive\Desktop\avatar\UAE_anthem\api\main.py", line 85, in _run_pipeline
+    raise RuntimeError("Video generation failed")
+RuntimeError: Video generation failed
+
