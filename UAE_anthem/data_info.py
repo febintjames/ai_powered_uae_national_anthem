@@ -1,30 +1,38 @@
-# 2. Define Local Paths for qwen
-bg_path = "data/bg.jpg"
+import os
 
-img3_m = "data/male/dress2.jpeg"
-prompt_m = "Place the man from the portrait standing in front of the Dubai Marina skyline with palm trees. The man should be in the foreground with the modern skyscrapers in the background. He is wearing white dress. Professional photography, natural daylight, clear sky, realistic composition."
-img3_f = "data/female/dress.jpeg"
-prompt_f = "Place the woman in front of the Dubai Marina skyline with palm trees. The woman should be in the foreground with the modern skyscrapers in the background. She is wearing a black abaya with UAE flag colors embellished panel and beige hijab. half-body shot,Professional photography, natural daylight, clear sky, realistic composition."
+# Base directory for the project's data assets (this keeps paths portable)
+BASE = os.path.join(os.path.dirname(__file__), "data")
 
-img3_b = "data/boy/dress.jpg"
-prompt_b = "Place the boy standing in front of the Dubai Marina skyline with palm trees. The boy should be in the foreground with the modern skyscrapers in the background. He is wearing a white thobe, body-body shot showing hands, Professional photography, natural daylight, clear sky, realistic composition."
+# 1) Define Local Paths for qwen/image assets
+bg_path = os.path.join(BASE, "bg.png")
 
-img3_g = "data/girl/dress.jpg"
-prompt_g = "Place the girl standing in front of the Dubai Marina skyline with palm trees. The girl should be in the foreground with the modern skyscrapers in the background. She wearing a UAE flag colors dress. half-body shot,  Professional photography, natural daylight, clear sky, realistic composition"
+img3_m = os.path.join(BASE, "male", "dress2.jpeg")
+prompt_m = "A half-body studio of a man wearing a crisp white Emirati Kandura with the red, green, white, and black UAE National Day sash scarf featuring gold embroidery and the UAE emblem draped over his shoulders. The background is an illustration of Dubai skyline with Burj Khalifa and buildings in beige tones, UAE flag on left, sand dunes, blue sky with clouds and a logo on top right corner."
 
 
-# 2. Define Local Paths for wan
+img3_f = os.path.join(BASE, "female", "dress.jpeg")
+prompt_f = "Half-body image of the woman wearing a black abaya with UAE flag colors embellished panel and beige hijab. The background is an illustration of Dubai skyline with Burj Khalifa and buildings in beige tones, UAE flag on left, sand dunes, blue sky with clouds and a logo on top right corner."
 
-# Select audio and prompt
-audio_m = "data/male/audio1.mp3"
-prompt_mw = "Man wearing white thobe with UAE flag scarf, standing in front of Dubai Marina skyline with palm trees, singing. natural daylight, professional video quality."
 
-audio_f = "data/female/audio1.mp3"
-prompt_fw = "Woman wearing beige hijab and black abaya with UAE flag colors panel, standing in front of Dubai Marina skyline with palm trees, singing. natural daylight, professional video quality"
+img3_b = os.path.join(BASE, "boy", "dress.jpg")
+prompt_b = "Half-body image of the boy wearing Emirati thobe. The background is an illustration of Dubai skyline with Burj Khalifa and buildings in beige tones, UAE flag on left, sand dunes, blue sky with clouds and a logo on top right corner."
 
-audio_b = "data/boy/audio1.mp3"
-prompt_bw = "Boy wearing white thobe with UAE flag colors cape and white ghutra headscarf, standing in front of Dubai Marina skyline with palm trees, singing. natural daylight, professional video quality."
+# The repository contains `data/girl/dress.jpeg` so use the `.jpeg` extension here
+img3_g = os.path.join(BASE, "girl", "dress.jpeg")
+prompt_g = "Half-body image of the girl wearing a UAE flag colors dress. The background is an illustration of Dubai skyline with Burj Khalifa and buildings in beige tones, UAE flag on left, sand dunes, blue sky with clouds and a logo on top right corner."
 
-audio_g = "data/girl/audio1.mp3"
-prompt_gw = "Girl wearing UAE flag colors dress with red top and multicolored tulle skirt in red, green, white and black, standing in front of Dubai Marina skyline with palm trees, singing. natural daylight, professional video quality."
+
+
+# 2) Define Local Paths for wan (audio + prompts)
+audio_m = os.path.join(BASE, "male", "audio1.mp3")
+prompt_mw = "The Man is singing"
+
+audio_f = os.path.join(BASE, "female", "audio1.mp3")
+prompt_fw = "The woman is singing."
+
+audio_b = os.path.join(BASE, "boy", "audio1.mp3")
+prompt_bw = "The boy is singing."
+
+audio_g = os.path.join(BASE, "girl", "audio1.mp3")
+prompt_gw = "The girl is singing."
 

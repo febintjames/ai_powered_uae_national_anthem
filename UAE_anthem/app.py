@@ -5,7 +5,7 @@ import time
 import json
 from typing import List, Dict, Any
 
-from wave import qwen_edit, save_video, wans2v, save_photo, generate_qr_code
+from wave import nano_banana_edit, save_video, wans2v, save_photo, generate_qr_code
 from quiz import get_random_questions, grade_answers
 
 
@@ -23,7 +23,7 @@ def _run_pipeline(img: str, age_gap: str, phone: str):
         with _JOB_LOCK:
             JOB_STATUS[phone] = {"status": "image", "video_path": None, "error": None}
 
-        edited_img = qwen_edit(img1=img, age_gap=age_gap)
+        edited_img = nano_banana_edit(img1=img, age_gap=age_gap)
         if not edited_img:
             raise RuntimeError("Image generation failed")
 
