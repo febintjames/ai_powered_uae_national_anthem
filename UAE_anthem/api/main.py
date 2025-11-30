@@ -80,22 +80,31 @@ def _s3_key(*parts: str) -> str:
     return "/".join([S3_PREFIX] + safe) if S3_PREFIX else "/".join(safe)
 
 def _s3_put_file(local_path: str, key: str, content_type: str) -> None:
-    """Upload local file to S3"""
-    s3.upload_file(
-        Filename=local_path,
-        Bucket=S3_BUCKET,
-        Key=key,
-        ExtraArgs={"ContentType": content_type},
-    )
+    """Upload local file to S3 without ACL (compatible with 'Bucket owner enforced')."""
+    extra_args = {"ContentType": content_type}
+    try:
+        # Try the normal upload without ACL
+        s3.upload_file(Filename=local_path, Bucket=S3_BUCKET, Key=key, ExtraArgs=extra_args)
+    except ClientError as e:
+        code = e.response.get("Error", {}).get("Code", "")
+        if code == "AccessControlListNotSupported" or "AccessControlListNotSupported" in str(e):
+            # Retry without ExtraArgs (older SDKs may require fewer params)
+            s3.upload_file(Filename=local_path, Bucket=S3_BUCKET, Key=key)
+        else:
+            raise
 
 def _s3_put_bytes(data: bytes, key: str, content_type: str) -> None:
-    """Upload bytes to S3"""
-    s3.put_object(
-        Bucket=S3_BUCKET,
-        Key=key,
-        Body=data,
-        ContentType=content_type,
-    )
+    """Upload bytes to S3 without ACL."""
+    try:
+        s3.put_object(Bucket=S3_BUCKET, Key=key, Body=data, ContentType=content_type)
+    except ClientError as e:
+        code = e.response.get("Error", {}).get("Code", "")
+        if code == "AccessControlListNotSupported" or "AccessControlListNotSupported" in str(e):
+            # Retry more basic put
+            s3.put_object(Bucket=S3_BUCKET, Key=key, Body=data)
+        else:
+            raise
+
 
 def _s3_url_for_key(key: str, expires: int = 86400) -> str:
     """Get public URL for S3 key (CDN or presigned)"""
