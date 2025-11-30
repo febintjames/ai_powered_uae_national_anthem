@@ -52,12 +52,18 @@ if USE_S3:
     if not S3_BUCKET:
         raise RuntimeError("USE_S3=true requires AWS_S3_BUCKET")
     
-    s3 = boto3.client(
-        "s3",
-        region_name=AWS_REGION,
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    )
+    # Configure S3 client with regional endpoint
+    s3_config = {
+        "region_name": AWS_REGION,
+        "aws_access_key_id": AWS_ACCESS_KEY_ID,
+        "aws_secret_access_key": AWS_SECRET_ACCESS_KEY,
+    }
+    
+    # Use regional endpoint URL for me-central-1 and other non-default regions
+    if AWS_REGION and AWS_REGION != 'us-east-1':
+        s3_config["endpoint_url"] = f"https://s3.{AWS_REGION}.amazonaws.com"
+    
+    s3 = boto3.client("s3", **s3_config)
     
     # Verify credentials
     try:
