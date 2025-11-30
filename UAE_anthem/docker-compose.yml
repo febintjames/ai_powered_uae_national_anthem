@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: uae-anthem-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - WSAI_KEY=${WSAI_KEY}
+      - PUBLIC_BASE_URL=${PUBLIC_BASE_URL}
+      - USE_S3=${USE_S3:-false}
+      - AWS_REGION=${AWS_REGION:-me-central-1}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - AWS_S3_PREFIX=${AWS_S3_PREFIX:-uae-national-day}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_S3_PUBLIC_DOMAIN=${AWS_S3_PUBLIC_DOMAIN}
+      - MAX_UPLOAD_SIZE_MB=${MAX_UPLOAD_SIZE_MB:-10}
+    volumes:
+      - ./result:/app/result
+      - ./uploads:/app/uploads
+      - ./data:/app/data:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
