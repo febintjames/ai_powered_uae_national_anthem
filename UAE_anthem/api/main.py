@@ -46,6 +46,13 @@ PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "").rstrip("/")
 MAX_UPLOAD_SIZE_MB = int(os.getenv("MAX_UPLOAD_SIZE_MB", "10"))
 MAX_UPLOAD_SIZE = MAX_UPLOAD_SIZE_MB * 1024 * 1024
 
+# Mock mode for testing (bypasses real AI services)
+MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"
+
+if MOCK_MODE:
+    print("🎭 MOCK MODE ENABLED - Using test data instead of real AI services")
+    print("   Set MOCK_MODE=false in .env to use real video generation")
+
 # ========== INITIALIZE S3 ==========
 s3 = None
 if USE_S3:
@@ -202,18 +209,35 @@ def _run_pipeline(job_id: str, img_path: str, age_group: str, phone: Optional[st
                 "started_at": time.time(),
             }
 
-        # Step 1: Image generation
-        edited_img_url = nano_banana_edit(img1=img_path, age_gap=age_group)
-        if not edited_img_url:
-            raise RuntimeError("Image generation failed")
+        if MOCK_MODE:
+            # === MOCK MODE ===
+            print(f"🎭 MOCK MODE: Skipping AI services for job {job_id}")
+            
+            # Simulate processing time (5 seconds total)
+            time.sleep(2)  # Image processing
+            with JOBS_LOCK:
+                JOBS[job_id]["status"] = "video"
+            
+            time.sleep(3)  # Video processing
+            
+            # Use test URLs
+            edited_img_url = "https://via.placeholder.com/720x1280/00732F/FFFFFF?text=Mock+Image"
+            video_url_remote = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            
+        else:
+            # === REAL MODE ===
+            # Step 1: Image generation
+            edited_img_url = nano_banana_edit(img1=img_path, age_gap=age_group)
+            if not edited_img_url:
+                raise RuntimeError("Image generation failed")
 
-        with JOBS_LOCK:
-            JOBS[job_id]["status"] = "video"
+            with JOBS_LOCK:
+                JOBS[job_id]["status"] = "video"
 
-        # Step 2: Video generation
-        video_url_remote = wans2v(img=edited_img_url, age_gap=age_group)
-        if not video_url_remote:
-            raise RuntimeError("Video generation failed")
+            # Step 2: Video generation
+            video_url_remote = wans2v(img=edited_img_url, age_gap=age_group)
+            if not video_url_remote:
+                raise RuntimeError("Video generation failed")
 
         # Step 3: Store media (S3 or local)
         if USE_S3:

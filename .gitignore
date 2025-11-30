@@ -63,9 +63,9 @@ env/
 # Generated content (privacy-sensitive)
 result/
 uploads/
-*.mp4
-*.mp3
-*.wav
+# *.mp4
+# *.mp3
+# *.wav
 
 # Exclude result folder entirely (all generated media)
 result/videos/
@@ -99,14 +99,14 @@ Desktop.ini
 *.ipynb
 
 # Keep essential data assets
-!data/
-!data/*.jpg
-!data/*.jpeg
-!data/*.json
-!data/male/
-!data/female/
-!data/boy/
-!data/girl/
+# !data/
+# !data/*.jpg
+# !data/*.jpeg
+# !data/*.json
+# !data/male/
+# !data/female/
+# !data/boy/
+# !data/girl/
 
 # Keep .env.example
 !.env.example

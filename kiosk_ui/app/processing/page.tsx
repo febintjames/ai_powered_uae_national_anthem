@@ -33,15 +33,32 @@ export default function Processing() {
 
         if (status.status === 'completed') {
           clearInterval(interval);
-          clearInterval(progressInterval);
-          setProgress(100);
+
+          // Fast forward animation - always 2 seconds
           setVideoUrl(status.video_url || '');
           setQrUrl(status.qr_url || '');
+          setCurrentMessage('Finalizing your video...');
 
-          // Navigate to review after a brief delay
-          setTimeout(() => {
-            router.push('/review');
-          }, 1000);
+          // Clear the slow progress interval
+          clearInterval(progressInterval);
+
+          // Smooth 2-second animation: 40 steps at 50ms = 2000ms
+          let step = 0;
+          const totalSteps = 40;
+          const fastForward = setInterval(() => {
+            step++;
+            const newProgress = (step / totalSteps) * 100;
+            setProgress(newProgress);
+
+            if (step >= totalSteps) {
+              clearInterval(fastForward);
+              setProgress(100);
+              setTimeout(() => {
+                router.push('/review');
+              }, 300);
+            }
+          }, 50);
+
         } else if (status.status === 'failed') {
           clearInterval(interval);
           clearInterval(progressInterval);
@@ -66,13 +83,13 @@ export default function Processing() {
     // Poll every 2 seconds
     interval = setInterval(pollStatus, 2000);
 
-    // Simulate progress (purely visual)
+    // Simulate progress (purely visual) - slow increment
     progressInterval = setInterval(() => {
       setProgress((prev) => {
-        if (currentStatus === 'completed') return 100;
+        if (currentStatus === 'completed') return prev; // Handled by fast forward
         if (currentStatus === 'failed') return prev;
-        // Gradually increase but never reach 100 until completed
-        return Math.min(prev + Math.random() * 15, 95);
+        // Gradually increase but never reach 90 until completed
+        return Math.min(prev + Math.random() * 5, 90);
       });
     }, 1000);
 
@@ -138,7 +155,7 @@ export default function Processing() {
           {/* Progress Bar */}
           <div className="w-full bg-gray-300 rounded-full h-4 mb-6 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-emerald-600 to-red-600 h-full transition-all duration-500 ease-out"
+              className="bg-gradient-to-r from-emerald-600 to-red-600 h-full transition-all duration-100 ease-linear"
               style={{ width: `${Math.min(progress, 100)}%` }}
             />
           </div>
