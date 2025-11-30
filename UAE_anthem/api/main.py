@@ -85,7 +85,7 @@ def _s3_put_file(local_path: str, key: str, content_type: str) -> None:
         Filename=local_path,
         Bucket=S3_BUCKET,
         Key=key,
-        ExtraArgs={"ContentType": content_type, "ACL": "public-read"},  # Make public
+        ExtraArgs={"ContentType": content_type},
     )
 
 def _s3_put_bytes(data: bytes, key: str, content_type: str) -> None:
@@ -95,7 +95,6 @@ def _s3_put_bytes(data: bytes, key: str, content_type: str) -> None:
         Key=key,
         Body=data,
         ContentType=content_type,
-        ACL="public-read",  # Make public
     )
 
 def _s3_url_for_key(key: str, expires: int = 86400) -> str:
