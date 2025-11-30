@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 interface BackgroundWrapperProps {
     children: React.ReactNode;
@@ -27,6 +28,18 @@ export default function BackgroundWrapper({ children }: BackgroundWrapperProps) 
             {/* Content */}
             <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center">
                 {children}
+            </div>
+
+            {/* Company Logo - Bottom Center */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center z-20">
+                <Image
+                    src="/aibotics-logo.jpg"
+                    alt="Aiibotics Logo"
+                    width={150}
+                    height={45}
+                    className="rounded-lg"
+                    priority
+                />
             </div>
 
             <style jsx>{`

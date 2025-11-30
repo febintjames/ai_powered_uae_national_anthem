@@ -32,8 +32,8 @@ export default function Quiz() {
             if (currentQuestion < quizQuestions.length - 1) {
                 setCurrentQuestion(currentQuestion + 1);
             } else {
-                // Last question - go to puzzle
-                router.push('/puzzle');
+                // Last question - go directly to processing (skip puzzle)
+                router.push('/processing');
             }
         }, 800); // 800ms to see the green/red feedback
     };
@@ -146,7 +146,7 @@ export default function Quiz() {
                             <p className="text-gray-600 text-sm">
                                 {currentQuestion < quizQuestions.length - 1
                                     ? 'Moving to next question...'
-                                    : 'Proceeding to puzzle...'}
+                                    : 'Processing your video...'}
                             </p>
                         </div>
                     )}
