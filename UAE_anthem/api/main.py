@@ -115,10 +115,20 @@ def _s3_put_bytes(data: bytes, key: str, content_type: str) -> None:
 def _s3_url_for_key(key: str, expires: int = 86400) -> str:
     """Get public URL for S3 key (CDN or presigned)"""
     if S3_PUBLIC_DOMAIN:
-        # Use CloudFront/CDN domain
-        return f"{S3_PUBLIC_DOMAIN}/{key}"
+        # CloudFront Origin Path handles the prefix
+        # Remove prefix from key to avoid double-prefix
+        # S3 key: "uae-national-day/videos/abc.mp4"
+        # CloudFront URL: "/videos/abc.mp4" (origin path adds prefix automatically)
+        
+        if S3_PREFIX and key.startswith(f"{S3_PREFIX}/"):
+            # Strip prefix for CloudFront
+            clean_key = key[len(S3_PREFIX) + 1:]  # Remove "uae-national-day/"
+        else:
+            clean_key = key
+            
+        return f"{S3_PUBLIC_DOMAIN}/{clean_key}"
     else:
-        # Generate presigned URL
+        # Presigned URL includes full key
         return s3.generate_presigned_url(
             "get_object",
             Params={"Bucket": S3_BUCKET, "Key": key},
